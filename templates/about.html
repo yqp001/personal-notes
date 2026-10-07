@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}关于 · 个人笔记{% endblock %}
+{% block content %}
+<section class="page-narrow about-page">
+  <h1>关于个人笔记</h1>
+
+  <h2>这是什么</h2>
+  <p>个人笔记是一个本地运行的个人笔记应用，用 Markdown 写作，支持分享与评论。</p>
+
+  <h2>功能一览</h2>
+  <ul class="about-list">
+    <li>注册与登录</li>
+    <li>Markdown 写作与实时预览</li>
+    <li>草稿与发布</li>
+    <li>划词 AI 润色</li>
+    <li>笔记收藏</li>
+    <li>链接分享（可设密码）</li>
+    <li>评论互动</li>
+  </ul>
+
+  <h2>技术栈</h2>
+  <ul class="about-list">
+    <li>前端：HTML + CSS + 原生 JavaScript</li>
+    <li>后端：Python + Flask</li>
+    <li>数据库：SQLite</li>
+    <li>Markdown 渲染：marked.js（本地引入）</li>
+    <li>AI 润色：默认离线演示模式，可配置接入大模型服务</li>
+  </ul>
+
+  <h2>说明</h2>
+  <p>本应用用于本地演示，不包含邮箱验证、找回密码、公开笔记广场等功能。AI 润色为演示模式时不会把文本发送到任何外部服务；启用真实服务后，被选中的文本会发送至你所配置的服务商。</p>
+</section>
+{% endblock %}

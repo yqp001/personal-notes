@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}我的笔记 · 个人笔记{% endblock %}
+{% block content %}
+<section class="notes-page">
+  <div class="notes-head">
+    <h1>我的笔记</h1>
+    <a class="btn btn-primary" href="/notes/new">写笔记</a>
+  </div>
+
+  <div class="filter-bar" role="group" aria-label="按状态筛选笔记">
+    <button type="button" data-status="all" class="is-active">全部</button>
+    <button type="button" data-status="published">已发布</button>
+    <button type="button" data-status="draft">草稿</button>
+  </div>
+
+  <p class="form-error" id="notes-error" hidden></p>
+
+  <ul id="notes-list" class="note-list" hidden></ul>
+
+  <div class="empty-state" id="notes-empty" hidden>
+    <p id="notes-empty-text"></p>
+    <a class="btn btn-primary" id="notes-empty-action" href="/notes/new" hidden>写笔记</a>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/notes_list.js') }}"></script>
+{% endblock %}

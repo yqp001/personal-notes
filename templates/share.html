@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}分享的笔记 · 个人笔记{% endblock %}
+{% block content %}
+<section class="share-page">
+  <section class="share-lock" id="share-lock" hidden>
+    <h2>该分享需要密码</h2>
+    <label for="unlock-password">访问密码</label>
+    <input id="unlock-password" type="password" autocomplete="off">
+    <p class="form-error" id="unlock-error" hidden></p>
+    <button type="button" id="unlock-btn" class="btn btn-primary">解锁</button>
+  </section>
+
+  <article class="note-paper" id="share-content" hidden>
+    <h1 id="share-title"></h1>
+    <p class="note-meta">作者：<span id="share-author"></span> · 更新于 <time id="share-time"></time></p>
+    <div id="share-body" class="markdown-body"></div>
+  </article>
+
+  <section class="comments" id="share-comments" hidden>
+    <h2>评论</h2>
+    <div id="comment-list"></div>
+    <p class="muted" id="comment-empty" hidden>还没有评论，来说点什么吧</p>
+    <form id="comment-form">
+      <div id="nickname-field">
+        <label for="nickname">昵称</label>
+        <input id="nickname" autocomplete="nickname">
+      </div>
+      <label for="comment-content">评论内容</label>
+      <textarea id="comment-content" rows="3"></textarea>
+      <p class="form-error" id="comment-error" hidden></p>
+      <button type="submit" class="btn btn-primary">发表评论</button>
+    </form>
+  </section>
+
+  <section class="share-invalid" id="share-invalid" hidden>
+    <h2>分享链接无效或已取消</h2>
+    <a class="btn btn-ghost" href="/">返回主页</a>
+  </section>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='vendor/marked.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/purify.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/markdown.js') }}"></script>
+<script src="{{ url_for('static', filename='js/share.js') }}"></script>
+{% endblock %}

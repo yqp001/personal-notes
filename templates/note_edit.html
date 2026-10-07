@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}写笔记 · 个人笔记{% endblock %}
+{% block content %}
+<section class="editor-page">
+  <h1 class="visually-hidden">写笔记</h1>
+
+  <div class="editor-bar">
+    <a class="btn btn-ghost" href="/notes">← 返回</a>
+
+    <label class="visually-hidden" for="title">笔记标题</label>
+    <input id="title" name="title" class="editor-title" placeholder="无标题" autocomplete="off">
+
+    <div class="editor-actions">
+      <button type="button" id="ai-polish-btn" class="btn btn-ghost">AI 润色</button>
+      <button type="button" id="save-draft" class="btn btn-ghost">保存草稿</button>
+      <button type="button" id="publish" class="btn btn-primary">发布</button>
+    </div>
+  </div>
+
+  <p class="form-error" id="editor-error" hidden></p>
+  <p class="form-ok" id="editor-notice" data-notice hidden></p>
+  <a id="editor-back-list" class="btn btn-ghost" href="/notes" hidden>返回列表</a>
+
+  <div class="editor-tabs">
+    <button type="button" data-mode="edit" class="is-active">编辑</button>
+    <button type="button" data-mode="preview">预览</button>
+  </div>
+
+  <div class="editor-split" data-mode="edit">
+    <label class="visually-hidden" for="content">笔记内容</label>
+    <textarea id="content" class="editor-pane" spellcheck="false"
+              placeholder="用 Markdown 写下你的想法，右侧实时预览…"></textarea>
+    <div id="preview" class="preview-pane parchment markdown-body"></div>
+  </div>
+
+  {# AI 润色：仅含一项的自定义右键菜单（选区为空时不弹出，保留浏览器原生菜单） #}
+  <div class="ctx-menu" id="ctx-menu" hidden>
+    <button type="button" class="ctx-item" id="ctx-item">AI 润色</button>
+  </div>
+
+  {# AI 润色：左右对照弹窗（标题与按钮文案由提示词固定，不得改写） #}
+  <div class="modal-mask" id="polish-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="polish-title">
+      <h2 id="polish-title">AI 文本润色 <span class="badge" id="polish-badge" hidden>演示模式</span></h2>
+      <div class="modal-cols">
+        <section class="modal-col">
+          <h3>原文</h3>
+          <textarea id="polish-source" class="pane-readonly" aria-label="原文" readonly></textarea>
+        </section>
+        <section class="modal-col">
+          <h3>润色结果</h3>
+          <textarea id="polish-result" aria-label="润色结果" placeholder="润色中…"></textarea>
+          <div class="polish-status" id="polish-status" hidden>
+            <span class="spinner" id="polish-spinner" aria-hidden="true"></span>
+            <span id="polish-status-text">润色中…</span>
+            <button type="button" id="polish-retry" class="btn btn-ghost" hidden>重试</button>
+          </div>
+        </section>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="polish-cancel" class="btn btn-ghost">取消</button>
+        <button type="button" id="polish-confirm" class="btn btn-primary" disabled>确认替换</button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='vendor/marked.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/purify.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/markdown.js') }}"></script>
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/polish.js') }}"></script>
+<script src="{{ url_for('static', filename='js/note_edit.js') }}"></script>
+{% endblock %}

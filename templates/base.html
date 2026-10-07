@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}个人笔记{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">个人笔记</a>
+    <button type="button" id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="site-nav">菜单</button>
+    <nav class="site-nav" id="site-nav">
+      {% if current_user %}
+        <a href="/notes/new">写笔记</a><a href="/notes">我的笔记</a>
+        <a href="/profile#favorites">我的收藏</a><a href="/profile">个人主页</a>
+        <button type="button" id="logout-btn">退出</button>
+      {% else %}
+        <a href="/login">登录</a><a href="/register">注册</a><a href="/about">关于</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><span>个人笔记 · 用文字记录生活</span><a href="/about">关于</a></footer>
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

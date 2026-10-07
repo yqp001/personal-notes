@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}笔记详情 · 个人笔记{% endblock %}
+{% block content %}
+<section class="note-detail">
+  <p class="form-error" id="note-error" hidden></p>
+
+  <div class="note-actions" id="note-actions" hidden>
+    <button type="button" id="favorite-btn" class="btn btn-ghost" aria-pressed="false">
+      <span class="heart" aria-hidden="true">♡</span><span id="favorite-label">收藏</span>
+    </button>
+    <button type="button" id="share-btn" class="btn btn-ghost">分享</button>
+    <a id="edit-btn" class="btn btn-ghost" href="#">编辑</a>
+    <button type="button" id="delete-btn" class="btn btn-ghost">删除</button>
+  </div>
+
+  <div id="share-panel" class="share-panel" hidden>
+    <label for="share-password">访问密码（留空表示无需密码）</label>
+    <input id="share-password" type="text" autocomplete="off" placeholder="至少 4 位">
+    <button type="button" id="share-generate" class="btn btn-primary">生成分享链接</button>
+    <div id="share-result" hidden>
+      <p>已生成分享链接</p>
+      <input id="share-url" type="text" readonly>
+      <button type="button" id="share-copy" class="btn btn-ghost">复制链接</button>
+      <button type="button" id="share-cancel" class="btn btn-ghost">取消分享</button>
+    </div>
+    <p class="form-error" id="share-error" hidden></p>
+  </div>
+
+  <article class="note-paper">
+    <h1 id="note-title"></h1>
+    <p class="note-meta" id="note-meta">更新于 <time id="note-time"></time></p>
+    <div class="markdown-body" id="note-body"></div>
+  </article>
+
+  <a id="note-back" class="btn btn-ghost" href="/notes" hidden>返回我的笔记</a>
+
+  <section class="comments" id="comments">
+    <h2>评论</h2>
+    <p class="muted">评论在分享页开放：点上方「分享」生成链接，读者打开链接后即可留言。</p>
+  </section>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='vendor/marked.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/purify.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/markdown.js') }}"></script>
+<script src="{{ url_for('static', filename='js/note_detail.js') }}"></script>
+{% endblock %}

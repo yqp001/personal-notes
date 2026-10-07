@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}个人主页 · 个人笔记{% endblock %}
+{% block content %}
+<section>
+  <h1>个人主页</h1>
+  <div class="profile-grid">
+    <section class="profile-card">
+      <h2>个人信息</h2>
+      <form id="profile-form" data-profile-form novalidate>
+        <label for="username">用户名</label>
+        <input id="username" name="username" autocomplete="nickname" required>
+        <label for="bio">简介</label>
+        <textarea id="bio" name="bio" rows="3"></textarea>
+        <p class="form-error" id="form-error" data-error hidden></p>
+        <p class="form-ok" id="form-notice" data-notice hidden></p>
+        <button type="submit" class="btn btn-primary">保存修改</button>
+      </form>
+    </section>
+    <section class="profile-card" id="notes">
+      <h2>我的笔记</h2>
+      <ul id="my-notes-list" class="link-list" hidden></ul>
+      <div id="my-notes-empty" class="empty-state-sm" hidden>
+        <p>还没有笔记，写下第一条吧</p>
+        <a class="btn btn-ghost" href="/notes/new">写笔记</a>
+      </div>
+    </section>
+    <section class="profile-card" id="favorites">
+      <h2>我的收藏</h2>
+      <ul id="favorites-list" class="link-list" hidden></ul>
+      <div id="favorites-empty" class="empty-state-sm" hidden>
+        <p>还没有收藏，去笔记列表看看吧</p>
+        <a class="btn btn-ghost" href="/notes">去笔记列表</a>
+      </div>
+    </section>
+    <section class="profile-card" id="shares">
+      <h2>分享管理</h2>
+      <ul id="shares-list" class="link-list" hidden></ul>
+      <div id="shares-empty" class="empty-state-sm" hidden>
+        <p>还没有分享任何笔记，去笔记详情页点「分享」试试</p>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/profile.js') }}"></script>{% endblock %}
